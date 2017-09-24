@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# List all files, long format, colorized, permissions in octal
+function all() {
+
+    # $3 permissions
+    # $6 user
+    # $7 date
+    # $8 time
+    # $5 size
+
+    arg=""
+    while [ "$1" != "" ];do
+        case $1 in
+            -a | --all )
+                arg="-a"
+                ;;
+            * ) 
+                ;; 
+        esac
+        shift
+    done
+
+   ll $arg "$@" | awk '
+        {
+            if($9 != "" && $9 != "." && $9 != ".."){
+                MM=$6;
+                dd=$7;
+                tt=$8;
+                size=$5;
+
+                $1=$2=$3=$4=$5=$6=$7=$8=""
+
+                rest=substr($0,9)
+
+                split(rest,name,"->")
+
+                printf("%4s %4s %6s %6s | %s\n", MM, dd, tt, size, name[1])
+            }
+        }'
+
+}
+
+
+    
+
+
+
+# ip address
+function myip(){
+    echo -n 'Public IP:'
+    dig +short myip.opendns.com @resolver1.opendns.com
+}
+
+function localip(){
+    echo -n 'Local IP:'
+    ipconfig getifaddr en0
+}
+
+function ip(){
+    localip
+    myip
+}
+
+# cd into whatever is the forefront Finder window.
+function cdf(){
+    cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
+}
+alias gotoFinder=cdf
+
+
+
+
+# edit a function
+function vimf(){
+    filename=''
+    case $1 in
+        d|dev ) 
+            filename='dev_functions'
+            ;;
+        s|shell)
+            filename='shell_functions'
+            ;;
+        o|other)
+            filename='other_functions'
+            ;;
+        *)
+            filename=$1'_functions'
+            ;;
+    esac
+    
+    file=$HOME/.functions/$filename
+    if [ ! -e $file ]; then
+        echo '#!/bin/bash' >> $file
+    fi
+    vim $HOME/.functions/$filename
+}
+
