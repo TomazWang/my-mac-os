@@ -1,0 +1,4 @@
+usage: javis wifi <command>
+    
+    check     Check wifi status. as check_wifi.
+    on        Turn on wifi.

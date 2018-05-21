@@ -1,0 +1,8 @@
+usage: ifttt <event_name> [<var1>[<var2>...]]
+
+Send a webhook request to ifttt.
+
+# Avaliable event_names
+
+line_hello  send "Hello World!" to line.
+

@@ -1,0 +1,3 @@
+# conda alias
+
+alias conda_env_tf='source activate tfdeeplearning'

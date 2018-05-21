@@ -1,0 +1,8 @@
+javis <function> [<var>...]
+
+Simple Command:
+  vib               Javis will vibrate once.
+  check_wifi        Javis will check wifi connection and return.
+                    The result via Line message.
+  wifi              Control wifi on Javis.
+  brightness        Control screen brightness.                       
