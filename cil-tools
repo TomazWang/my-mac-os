@@ -1,0 +1,40 @@
+# My Command Line Tools
+
+## Entertainment
+
+## Media
+
+### Play audio and video with mpv
+
+
+### Youtube with mpsyt
+- alias youtube
+
+
+## Games 
+
+### greed
+Very simple and addictive game in cil.
+
+### nudoku
+sudoku game in cil.
+
+## Internet
+
+### Reddit with rtv
+- alias reddit
+
+### Browse ptt
+- alias ptt
+
+
+## Files
+
+### open image with imgcat
+- alias img
+
+
+### Colorize your file with ccat
+- alias cat, override system cat
+
+
