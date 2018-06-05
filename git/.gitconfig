@@ -1,0 +1,68 @@
+[core]
+	excludesfile = /Users/tomaz/.gitignore_global
+	autocrlf = input
+	editor = /usr/bin/vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	email = TomazWang.tw@gmail.com
+	name = Tomaz Wang
+[commit]
+	template = /Users/tomaz/.stCommitMsg
+[alias]
+	# list all aliases
+	alias = "!git config -l | grep alias | cut -c 7-"
+
+  # 在瀏覽器打開本專案 
+	open = "!open $(git remote -v | awk '/origin.*fetch/{print$2}' | sed -Ee 's#(git@|git://)#http://#' -e 's@com:@com/@' | head -n1)"
+  browse = "!git open"
+
+  # 取消目前所有 stage 的檔案
+  unstage = !git reset HEAD -- && git status
+	
+
+	# 本 branch 所有 commit 的細節輸出，包含 tree
+	# 取代原有 alais
+	# 原先：log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+	llg = log --color --graph --abbrev-commit --shortstat --date=short\
+	 --pretty=format:'+===+==================================================================+=========+%n| %m | %C(yellow)%<(65)%H%Creset|%C(bold yellow)%><(9)%h%Creset|%n+---+------------------------------------------------------------------+---------+%n%C(bold magenta)%d%Creset%n%C(bold)%s%Creset%n%b%n%Cgreen%cd (%cr)%Creset%n- C:%C(blue)%cn%Creset<%ce>%n- A:%C(blue)%an%Creset<%ae>%n'
+	#--pretty='%C(yellow)%H%Creset %C(bold magenta)%d%Creset%n%s%n%+b%C(bold cyan)%an <%ae>%Creset %C(blue)%cr (%ci)%n' 
+
+
+	ll = log --color --all --abbrev-commit --stat=80,50 --date=short\
+	 --pretty=format:'+===+==================================================================+=========+%n| %m | %C(yellow)%<(65)%H%Creset|%C(bold yellow)%><(9)%h%Creset|%n+---+------------------------------------------------------------------+---------+%n%C(bold magenta)%d%Creset%n%C(bold)%s%Creset%n%b%n%Cgreen%cd (%cr)%Creset%n- C:%C(bold blue)%cn%Creset<%ce>%n- A:%C(blue)%an%Creset<%ae>%n'
+ 
+  	
+	# 本 branch 單行的圖像輸出
+	# 取代原有的 alias
+	# 原先：log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lg = log --oneline --color --graph --abbrev-commit --pretty='%C(yellow)%h%Creset %C(bold magenta)%d%Creset - %s %C(blue)(%cr)%Creset %C(bold cyan) <%an>'
+
+	# 所有 branch 單行的圖像輸出
+	# 取代原有的 alias
+	# 原先：log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	l = log --oneline --all --color --abbrev-commit --pretty='%C(yellow)%h%Creset %C(bold magenta)%d%Creset - %s %C(blue)(%cr)%Creset %C(bold cyan) <%an>'
+
+
+	showme = show -p --abbrev-commit --stat=80,50 --date=short\
+	 --pretty=format:'+===+==================================================================+=========+%n| %m | %C(yellow)%<(65)%H%Creset|%C(bold yellow)%><(9)%h%Creset|%n+---+------------------------------------------------------------------+---------+%n%C(bold magenta)%d%Creset%n%C(bold)%s%Creset%n%b%n%Cgreen%cd (%cr)%Creset%n- C:%C(bold blue)%cn%Creset<%ce>%n- A:%C(blue)%an%Creset<%ae>%n'
+
+   
+
+[color]
+	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[help]
+	autocorrect = 20
+[credential]
+	helper = osxkeychain
+[rebase]
+	autosquash = true
